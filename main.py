@@ -2,30 +2,20 @@ import pygame
 import random
 import math
 from pygame import mixer
-import sys
-import os
-def resource_path(relative_path):
-    try:
-    # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 
-background = pygame.image.load(resource_path("background.png"))
-mixer.music.load(resource_path("background.wav"))
+background = pygame.image.load("background.png")
+mixer.music.load("background.wav")
 mixer.music.play(-1)
 
 pygame.display.set_caption("Space Invaders")
 
-icon = pygame.image.load(resource_path("rocket.png"))
+icon = pygame.image.load("rocket.png")
 
 pygame.display.set_icon(icon)
 
-playerimg = pygame.image.load(resource_path("player.png"))
+playerimg = pygame.image.load("player.png")
 playerX = 370
 playerY = 480
 playerX_change = 0
@@ -37,13 +27,13 @@ enemyX_change = []
 enemyY_change = []
 num = 6
 for i in range(num):
-    enemyimg.append(pygame.image.load(resource_path("enemy.png")))
+    enemyimg.append(pygame.image.load("enemy.png"))
     enemyX.append(random.randint(0, 735))
     enemyY.append(random.randint(50, 150))
     enemyX_change.append(4)
     enemyY_change.append(40)
 
-bulletimg = pygame.image.load(resource_path("bullet.png"))
+bulletimg = pygame.image.load("bullet.png")
 bulletX = 0
 bulletY = 480
 bulletX_change = 0
@@ -146,7 +136,7 @@ while running:
 
         coll = Collision(enemyX[i], enemyY[i], bulletX, bulletY)
         if coll:
-            es = mixer.Sound(resource_path("explosion.wav"))
+            es = mixer.Sound("explosion.wav")
             es.play()
             bulletY = 480
             bullet_state = "ready"
